@@ -2,17 +2,20 @@ name: Update Repository Packages
 
 on:
   push:
-    branches: [ main ]  # Change to your default branch if different
+    branches: [ main ]
 
 jobs:
   update-packages:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # This is crucial for pushing changes
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Needed for pushing changes back
+          fetch-depth: 0
 
       - name: Make update.sh executable
         run: chmod +x update.sh
